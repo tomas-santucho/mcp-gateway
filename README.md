@@ -74,11 +74,12 @@ stdio clients.
 
 ## Docker and Hermes
 
-Build an image locally on the same architecture as the server that runs the
-adapters:
+The `dev` branch workflow publishes multi architecture images to
+`ghcr.io/tomas-santucho/mcp-gateway` with `dev` and commit SHA tags. For a local
+build on the server:
 
 ```bash
-docker build --tag mcp-gateway:0.1.0 .
+docker build --tag mcp-gateway:0.1.1 .
 ```
 
 The image runs non-root and includes only the runtime libraries needed by the
@@ -112,7 +113,7 @@ mcp_servers:
       - HERMES_HOME=/home/gateway/hermes
       - -e
       - TYPST_BIN=/usr/local/bin/typst
-      - mcp-gateway:0.1.0
+      - ghcr.io/tomas-santucho/mcp-gateway:dev
     timeout: 180
     connect_timeout: 20
 ```

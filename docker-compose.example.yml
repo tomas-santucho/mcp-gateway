@@ -1,7 +1,7 @@
 services:
   mcp-gateway:
     build: .
-    image: mcp-gateway:0.1.0
+    image: ghcr.io/tomas-santucho/mcp-gateway:dev
     init: true
     stdin_open: true
     environment:

@@ -22,6 +22,17 @@ def test_resolved_environment_reads_references_without_embedding_values() -> Non
     assert resolved["MAIL_PASSWORD"] == "only-at-runtime"
 
 
+def test_resolved_environment_does_not_forward_unlisted_secrets() -> None:
+    config = UpstreamConfig.from_mapping({"name": "mail", "command": "python"})
+
+    resolved = config.resolved_environment(
+        {"PATH": "/usr/bin", "UNRELATED_SECRET": "must-not-leak"}
+    )
+
+    assert resolved["PATH"] == "/usr/bin"
+    assert "UNRELATED_SECRET" not in resolved
+
+
 def test_rejects_literal_secret_values() -> None:
     with pytest.raises(ConfigurationError, match="must reference an environment variable"):
         UpstreamConfig.from_mapping(

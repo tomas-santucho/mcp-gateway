@@ -70,7 +70,12 @@ class UpstreamConfig:
     def resolved_environment(self, source: Mapping[str, str] | None = None) -> dict[str, str]:
         """Resolve only declared variable references without logging their values."""
         available = os.environ if source is None else source
-        resolved = dict(os.environ)
+        base_environment = os.environ if source is None else source
+        resolved = {
+            key: value
+            for key, value in base_environment.items()
+            if key in {"PATH", "HOME", "LANG", "LC_ALL", "TMPDIR", "SSL_CERT_FILE", "SSL_CERT_DIR"}
+        }
         for variable, reference in self.env.items():
             match = _ENV_REFERENCE.fullmatch(reference)
             assert match is not None

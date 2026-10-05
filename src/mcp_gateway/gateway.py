@@ -128,7 +128,7 @@ def create_server(upstreams: tuple[UpstreamConfig, ...]) -> Server[Gateway]:
 
     return Server(
         "mcp-gateway",
-        version="0.1.0",
+        version="0.1.1",
         instructions="Namespaced tools are proxied to configured downstream MCP servers.",
         lifespan=lifespan,
         on_list_tools=list_tools,
