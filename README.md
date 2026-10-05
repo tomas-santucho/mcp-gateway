@@ -113,12 +113,25 @@ stdio clients.
 
 ## Docker and Hermes
 
-The `dev` branch workflow publishes multi architecture images to
-`ghcr.io/tomas-santucho/mcp-gateway` with `dev` and commit SHA tags. For a local
-build on the server:
+The release workflow publishes multi architecture images to
+`ghcr.io/tomas-santucho/mcp-gateway` when a version tag (`v*`) is pushed. It
+runs lint, formatting, tests, type checking, verifies the tag against the Python
+package version, then publishes both the version tag and `latest` for
+`linux/amd64` and `linux/arm64`.
+
+To publish a release, update the package version and changelog, then push the
+matching tag. For example, for version `0.1.3`:
 
 ```bash
-docker build --tag mcp-gateway:0.1.2 .
+git tag v0.1.3
+git push origin v0.1.3
+```
+
+The workflow runs the same verification commands locally available under
+[Local development](#local-development). For a local image build on the server:
+
+```bash
+docker build --tag mcp-gateway:0.1.3 .
 ```
 
 The image runs non-root and includes only the runtime libraries needed by the
@@ -152,7 +165,7 @@ mcp_servers:
       - HERMES_HOME=/home/gateway/hermes
       - -e
       - TYPST_BIN=/usr/local/bin/typst
-      - ghcr.io/tomas-santucho/mcp-gateway:dev
+      - ghcr.io/tomas-santucho/mcp-gateway:v0.1.3
     timeout: 180
     connect_timeout: 20
 ```

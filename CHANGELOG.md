@@ -2,6 +2,35 @@
 
 All notable changes to this project are documented here.
 
+## 0.1.3 — 2026-10-05
+
+### Release automation
+
+- Changed the container publication trigger from every push to `dev` to version
+  tags matching `v*`, so a release is an explicit, reviewable action tied to a
+  package version.
+- Added a Python 3.12 release verification sequence that installs the project's
+  development dependencies and runs Ruff lint, Ruff formatting checks, pytest,
+  and strict mypy checks before any image is built or published.
+- Added a release guard that reads the authoritative `[project].version` from
+  `pyproject.toml` with Python's standard TOML parser and fails when the pushed
+  tag does not exactly match `v<version>`.
+- Configured the workflow to authenticate to GHCR using the short-lived
+  repository `GITHUB_TOKEN`, with workflow permissions limited to repository
+  contents read and package write.
+- Configured QEMU and Buildx to produce one multi-platform image manifest for
+  `linux/amd64` and `linux/arm64`, covering standard workstations and the ARM64
+  Hermes host.
+- Configured the successful release build to publish two tags for the same
+  verified image: the exact Git tag (for example `v0.1.3`) and `latest`.
+- Updated the README release procedure and Hermes example to explain the tag
+  trigger and select the versioned image for deployment.
+
+### Versioning
+
+- Advanced the Python package, advertised MCP server version, local Docker
+  build example, release instructions, and changelog to `0.1.3`.
+
 ## 0.1.2 — 2026-10-05
 
 ### Documentation
