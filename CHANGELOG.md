@@ -2,6 +2,37 @@
 
 All notable changes to this project are documented here.
 
+## 0.1.2 — 2026-10-05
+
+### Documentation
+
+- Reframed the README around the project's real origin: it is a personal
+  collection of MCP servers used in the author's day-to-day workflows, brought
+  together behind one Hermes gateway. This makes the project's intended scope
+  clear to both operators and readers evaluating it as an engineering sample.
+- Added a concise explanation of why the gateway exists: to manage a practical
+  set of frequently used tools through one stable endpoint while exercising
+  real MCP discovery, routing, lifecycle, and container-delivery concerns.
+- Added a table describing the four included adapters (Firefly III, Nextcloud
+  Calendar, IMAP email, and Typst), their everyday use, and whether they can
+  read data, change remote state, or write local files.
+- Added a technical overview describing MCP protocol composition, namespaced
+  tool routing, required-upstream startup behavior, minimized child process
+  environments, non-root container execution, and multi-architecture image
+  publishing. Each statement reflects code or deployment configuration in this
+  repository.
+- Clarified the project is a personal, opinionated collection rather than an
+  exhaustive catalog, and that it composes existing adapters instead of
+  reimplementing provider integrations.
+- Clarified the gateway does not apply authorization or confirmation policy to
+  downstream calls; the MCP client or operator policy remains responsible for
+  confirming calendar mutations and external sharing.
+
+### Versioning
+
+- Advanced the package, gateway server, and local Docker example to version
+  `0.1.2` so the documentation and published artifact version remain aligned.
+
 ## 0.1.1 — 2026-10-05
 
 ### Security
