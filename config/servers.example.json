@@ -1,0 +1,47 @@
+{
+  "servers": [
+    {
+      "name": "firefly",
+      "command": "python",
+      "args": ["/opt/adapters/firefly-mcp/server.py"],
+      "env": {
+        "FIREFLY_URL": "${FIREFLY_URL}",
+        "FIREFLY_TOKEN": "${FIREFLY_TOKEN}"
+      },
+      "required": true
+    },
+    {
+      "name": "calendar",
+      "command": "python",
+      "args": ["/opt/adapters/nextcloud-mcp/server.py"],
+      "env": {
+        "NEXTCLOUD_URL": "${NEXTCLOUD_URL}",
+        "NEXTCLOUD_USER": "${NEXTCLOUD_USER}",
+        "NEXTCLOUD_PASSWORD": "${NEXTCLOUD_PASSWORD}"
+      },
+      "required": true
+    },
+    {
+      "name": "email",
+      "command": "python",
+      "args": ["/opt/adapters/email-mcp/server.py"],
+      "env": {
+        "EMAIL_ADDRESS": "${EMAIL_ADDRESS}",
+        "EMAIL_PASSWORD": "${EMAIL_PASSWORD}",
+        "EMAIL_IMAP_HOST": "${EMAIL_IMAP_HOST}",
+        "EMAIL_IMAP_PORT": "${EMAIL_IMAP_PORT}"
+      },
+      "required": true
+    },
+    {
+      "name": "typst",
+      "command": "python",
+      "args": ["/opt/adapters/typst-mcp/server.py"],
+      "env": {
+        "HERMES_HOME": "${HERMES_HOME}",
+        "TYPST_BIN": "${TYPST_BIN}"
+      },
+      "required": true
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+services:
+  mcp-gateway:
+    build: .
+    image: mcp-gateway:0.1.0
+    init: true
+    stdin_open: true
+    environment:
+      MCP_GATEWAY_CONFIG: /config/servers.json
+    env_file:
+      - .env
+    volumes:
+      # Mount reviewed local adapters and a non-secret config. Do not mount Docker's socket.
+      - ${MCP_ADAPTERS_DIR:?set MCP_ADAPTERS_DIR}:/opt/adapters:ro
+      - ${MCP_GATEWAY_CONFIG_FILE:?set MCP_GATEWAY_CONFIG_FILE}:/config/servers.json:ro

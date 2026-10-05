@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mcp-gateway"
+version = "0.1.0"
+description = "A namespaced stdio gateway for multiple MCP servers."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Tomas Santucho" }]
+dependencies = [
+  "fastmcp>=4.0,<5.0",
+  "icalendar>=7.0,<8.0",
+  "mcp>=2.0,<3.0",
+  "python-dateutil>=2.9,<3.0",
+  "requests>=2.32,<3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.15,<2",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "ruff>=0.11,<1",
+]
+
+[project.scripts]
+mcp-gateway = "mcp_gateway.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_gateway"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["mcp_gateway"]
